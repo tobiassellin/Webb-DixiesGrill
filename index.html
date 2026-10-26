@@ -3,147 +3,1472 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>[Restaurangens Namn] - God mat & lunch i [Stad]</title>
-  <!-- Tailwind CSS CDN för snabb och ren styling utan byggsteg -->
+  <title id="page-title">Dixies Grill - Klassisk Diner, Burgare & Lunch i Östersund</title>
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Retro Diner & Clean Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Lobster&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f7f3eb;
+    }
+    .font-diner-script {
+      font-family: 'Lobster', cursive;
+    }
+    .font-diner-slab {
+      font-family: 'Alfa Slab One', cursive;
+      letter-spacing: 0.03em;
+    }
+    /* Klassiskt schackrutigt diner-mönster (som golvet i restaurangen) */
+    .checkerboard-strip {
+      height: 14px;
+      background-color: #f7f3eb;
+      background-image:
+        linear-gradient(45deg, #1c1917 25%, transparent 25%),
+        linear-gradient(-45deg, #1c1917 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #1c1917 75%),
+        linear-gradient(-45deg, transparent 75%, #1c1917 75%);
+      background-size: 14px 14px;
+      background-position: 0 0, 0 7px, 7px -7px, -7px 0;
+    }
+    /* Dixies Retro Text-skugga */
+    .diner-text-shadow {
+      text-shadow: 3px 3px 0px #09383c, 5px 5px 0px rgba(0,0,0,0.35);
+    }
+    .diner-card-shadow {
+      box-shadow: 0 6px 0px #0d5c63, 0 12px 24px rgba(0,0,0,0.08);
+    }
+    /* Tvåtonad vägg-gradient inspirerad av Dixies lokal (ljusare turkos upptill, djupare krickgrön nedtill) */
+    .dixies-wall-bg {
+      background: linear-gradient(180deg, #3a9ca8 0%, #1d7882 48%, #0c444a 48%, #0e5860 100%);
+    }
+    /* Röda runda "hyttventiler"-detaljer inspirerade av fönstren i lokalen */
+    .porthole-ring {
+      border: 6px solid #dc2626;
+      box-shadow: inset 0 0 0 3px #fca5a5, 0 4px 12px rgba(0,0,0,0.3);
+    }
+  </style>
 </head>
-<body class="bg-stone-50 text-stone-800 antialiased font-sans">
+<body class="text-stone-800 antialiased selection:bg-red-600 selection:text-white">
 
   <!-- Flytande snabbknapp för mobilen (syns alltid längst ner i tumhöjd) -->
-  <div class="fixed bottom-4 left-4 right-4 z-50 md:hidden">
-    <a href="tel:063XXXXXX" class="block w-full text-center bg-amber-600 hover:bg-amber-700 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-amber-900/20 active:scale-95 transition">
-      📞 Ring & Boka / Beställ
+  <div class="fixed bottom-4 left-4 right-4 z-40 md:hidden">
+    <a id="mobile-call-btn" href="tel:063121610" class="block w-full text-center bg-red-600 hover:bg-red-700 text-white font-extrabold py-3.5 px-4 rounded-2xl border-2 border-amber-200 shadow-xl shadow-red-950/40 active:scale-95 transition uppercase tracking-wider text-sm">
+      📞 Ring & Beställ: 063-12 16 10
     </a>
   </div>
 
+  <!-- Top-list med adress & öppettider -->
+  <div class="bg-[#0b3b40] text-teal-100 text-xs py-2 px-4 border-b border-teal-800">
+    <div class="max-w-4xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2 font-medium">
+        <span class="inline-block w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+        <span>📍 Hagvägen 35, Östersund</span>
+        <span class="hidden sm:inline text-teal-400">•</span>
+        <span class="hidden sm:inline text-amber-300 font-semibold">★ 4.5/5 på Google</span>
+      </div>
+      <div class="font-semibold text-amber-300">
+        Mån–Fre 09–19 • Lör 11–15
+      </div>
+    </div>
+  </div>
+
   <!-- Header -->
-  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-stone-200">
-    <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
-      <a href="#" class="font-extrabold text-xl tracking-tight text-stone-900">
-        [Restaurangens Namn]
+  <header class="sticky top-0 z-40 bg-[#f7f3eb]/95 backdrop-blur border-b-4 border-red-600 shadow-md">
+    <div class="max-w-5xl mx-auto px-4 h-20 flex items-center justify-between gap-4">
+      <!-- Retro Dixies Food Line Logo -->
+      <a href="#" class="flex items-center gap-3 group shrink-0">
+        <div class="w-12 h-12 rounded-full bg-[#0e5860] border-4 border-red-600 shadow-md flex items-center justify-center shrink-0 group-hover:scale-105 transition">
+          <span class="font-diner-script text-2xl text-amber-300 drop-shadow">D</span>
+        </div>
+        <div class="leading-none whitespace-nowrap">
+          <span id="nav-restaurant-name" class="font-diner-script text-3xl text-red-600 tracking-wide block" style="text-shadow: 1px 1px 0px #1c1917;">
+            Dixies Grill
+          </span>
+          <span class="text-[10px] font-extrabold uppercase tracking-[0.25em] text-[#0e5860] block mt-0.5">
+            Food Line • Östersund
+          </span>
+        </div>
       </a>
-      <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
-        <a href="#lunch" class="hover:text-amber-600 transition">Dagens Lunch</a>
-        <a href="#meny" class="hover:text-amber-600 transition">Meny</a>
-        <a href="#kontakt" class="hover:text-amber-600 transition">Öppettider & Kontakt</a>
-        <a href="tel:063XXXXXX" class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg font-semibold transition">
-          Ring 063-XX XX XX
+
+      <!-- Desktop-meny -->
+      <nav class="hidden md:flex items-center gap-4 lg:gap-6 text-sm font-bold text-stone-800">
+        <a href="#meny" class="hover:text-red-600 transition uppercase tracking-wide whitespace-nowrap">Meny & Burgare</a>
+        <a href="#lunch" class="hover:text-red-600 transition uppercase tracking-wide whitespace-nowrap">Dagens Lunch</a>
+        <a href="#atmosfar" class="hover:text-red-600 transition uppercase tracking-wide whitespace-nowrap">Vår Diner</a>
+        <a href="#kontakt" class="hover:text-red-600 transition uppercase tracking-wide whitespace-nowrap">Hitta hit</a>
+        <a id="nav-call-btn" href="tel:063121610" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2.5 rounded-xl font-extrabold transition shadow-md border-2 border-red-800 inline-flex items-center gap-1.5 whitespace-nowrap shrink-0">
+          <span>📞</span>
+          <span class="whitespace-nowrap">063-12 16 10</span>
         </a>
       </nav>
+
+      <!-- Mobil-menyknapp -->
+      <button id="mobile-menu-toggle" type="button" aria-label="Öppna meny" class="md:hidden p-2.5 rounded-xl text-stone-800 bg-white border-2 border-stone-300 hover:border-red-600 transition">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobil-meny (nedfällbar) -->
+    <div id="mobile-menu" class="hidden md:hidden bg-[#f7f3eb] border-t-2 border-stone-200 px-4 py-4 space-y-2 text-sm font-bold uppercase tracking-wider">
+      <a href="#meny" class="block py-2.5 px-3 rounded-lg hover:bg-red-50 hover:text-red-600 transition mobile-nav-link">🍔 Meny & Burgare</a>
+      <a href="#lunch" class="block py-2.5 px-3 rounded-lg hover:bg-red-50 hover:text-red-600 transition mobile-nav-link">🍽️ Veckans Lunch</a>
+      <a href="#atmosfar" class="block py-2.5 px-3 rounded-lg hover:bg-red-50 hover:text-red-600 transition mobile-nav-link">🎸 Vår Retro Diner</a>
+      <a href="#kontakt" class="block py-2.5 px-3 rounded-lg hover:bg-red-50 hover:text-red-600 transition mobile-nav-link">📍 Öppettider & Kontakt</a>
     </div>
   </header>
 
-  <!-- Hero-sektion -->
-  <section class="relative bg-stone-900 text-white py-16 px-4 sm:py-24">
-    <div class="max-w-3xl mx-auto text-center">
-      <span class="inline-block px-3 py-1 bg-amber-600/30 text-amber-300 rounded-full text-xs font-semibold tracking-wider uppercase mb-4">
-        Välkommen till [Restaurangens Namn]
-      </span>
-      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
-        Äkta smaker och lunch i hjärtat av [Stad]
+  <!-- Schackrutig Diner-bård -->
+  <div class="checkerboard-strip"></div>
+
+  <!-- Hero-sektion med Dixies Turkosa/Röda 50-tals Diner-känsla -->
+  <section class="relative bg-gradient-to-b from-[#2c8c99] via-[#13636d] to-[#0b3c42] text-white py-16 px-4 sm:py-24 overflow-hidden border-b-4 border-red-600">
+    <!-- Dekorativa bakgrundscirklar (inspirerade av de röda runda fönstren & gula klotlamporna) -->
+    <div class="pointer-events-none absolute -top-16 -left-16 w-64 h-64 rounded-full border-[14px] border-red-600/25"></div>
+    <div class="pointer-events-none absolute -bottom-20 -right-16 w-72 h-72 rounded-full border-[16px] border-amber-400/15"></div>
+
+    <div class="max-w-3xl mx-auto text-center relative z-10">
+      <!-- Retro Diner Skylt-Emblem -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-red-600 text-white rounded-full text-xs font-extrabold tracking-widest uppercase mb-6 border-2 border-amber-200 shadow-lg">
+        <span>🍔</span>
+        <span id="hero-badge">Dixie's Food Line • Klassisk Grill & Diner</span>
+        <span>🎸</span>
+      </div>
+
+      <h1 id="hero-title" class="font-diner-slab text-4xl sm:text-6xl tracking-wide mb-5 text-amber-50 diner-text-shadow leading-tight">
+        Östersunds skönaste grill & retro-diner!
       </h1>
-      <p class="text-stone-300 text-lg mb-8 max-w-xl mx-auto">
-        Klassiska rätter lagade från grunden med lokala råvaror. Ät här hos oss eller beställ för avhämtning.
+
+      <p id="hero-subtitle" class="text-teal-50 text-lg sm:text-xl mb-9 max-w-2xl mx-auto font-medium leading-relaxed drop-shadow">
+        Saftiga hamburgare direkt från stekbordet, krispiga pommes och riktiga gatuköksklassiker i äkta 50-talsmiljö på Hagvägen 35. Ät här i våra röda diner-stolar eller ta med!
       </p>
-      <div class="flex flex-col sm:flex-row gap-3 justify-center">
-        <a href="#lunch" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-6 py-3 rounded-xl transition text-center">
-          Se Dagens Lunch
+
+      <div class="flex flex-col sm:flex-row gap-3.5 justify-center">
+        <a href="#meny" class="bg-red-600 hover:bg-red-500 text-white font-extrabold px-7 py-3.5 rounded-2xl transition text-center shadow-lg border-2 border-amber-200 uppercase tracking-wider text-sm">
+          🍔 Se Burgare & Meny
         </a>
-        <a href="#kontakt" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3 rounded-xl transition text-center">
-          Öppettider & Hitta hit
+        <a href="#lunch" class="bg-amber-400 hover:bg-amber-300 text-stone-950 font-extrabold px-7 py-3.5 rounded-2xl transition text-center shadow-lg border-2 border-stone-900 uppercase tracking-wider text-sm">
+          🍽️ Dagens Lunch
         </a>
+        <a href="#kontakt" class="bg-white/15 hover:bg-white/25 text-white font-bold px-6 py-3.5 rounded-2xl transition text-center border border-white/30 backdrop-blur-sm text-sm">
+          📍 Öppettider & Hitta hit
+        </a>
+      </div>
+
+      <!-- Snabbfakta-brickor -->
+      <div class="mt-10 pt-8 border-t border-teal-400/30 grid grid-cols-3 gap-2 sm:gap-4 max-w-lg mx-auto text-xs sm:text-sm">
+        <div class="bg-black/25 backdrop-blur-sm rounded-xl py-2.5 px-3 border border-white/15">
+          <div class="font-extrabold text-amber-300">★ 4.5 / 5</div>
+          <div class="text-teal-100 text-[11px]">Betyg på Google</div>
+        </div>
+        <div class="bg-black/25 backdrop-blur-sm rounded-xl py-2.5 px-3 border border-white/15">
+          <div class="font-extrabold text-amber-300">Snabb Service</div>
+          <div class="text-teal-100 text-[11px]">Ät här eller Take Away</div>
+        </div>
+        <div class="bg-black/25 backdrop-blur-sm rounded-xl py-2.5 px-3 border border-white/15">
+          <div class="font-extrabold text-amber-300">Fri Parkering</div>
+          <div class="text-teal-100 text-[11px]">Precis utanför dörren</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Sektion: Dagens Lunch -->
+  <!-- Sektion: Veckans Deal / Aktuellt Erbjudande (Visas om aktiverad i Admin) -->
+  <section id="deal-section" class="pt-12 pb-2 px-4 max-w-4xl mx-auto hidden">
+    <div class="bg-white rounded-3xl border-4 border-red-600 diner-card-shadow overflow-hidden">
+      <div id="deal-grid" class="grid grid-cols-1 md:grid-cols-12 items-center">
+        <!-- Bildkolumn -->
+        <div id="deal-image-wrapper" class="md:col-span-5 h-60 md:h-full min-h-[240px] bg-stone-200 relative overflow-hidden border-b-4 md:border-b-0 md:border-r-4 border-red-600">
+          <img id="deal-image" src="" alt="Veckans Deal" class="w-full h-full object-cover">
+        </div>
+        <!-- Textkolumn -->
+        <div id="deal-content-wrapper" class="md:col-span-7 p-6 sm:p-8 bg-gradient-to-br from-amber-50/70 via-white to-red-50/30">
+          <span id="deal-badge" class="inline-block px-3.5 py-1 bg-red-600 text-white rounded-full text-xs font-extrabold uppercase tracking-wider mb-3 shadow-sm border border-red-800">
+            🔥 Dixies Favorit-Deal
+          </span>
+          <h2 id="deal-title" class="font-diner-slab text-2xl sm:text-3xl text-stone-900 tracking-wide">
+            Dixies Dubbel Cheese Meal (200g)
+          </h2>
+          <p id="deal-description" class="text-stone-700 text-sm sm:text-base mt-2.5 leading-relaxed">
+            Två nystekta burgare i sesambröd med smält cheddarost, krispig isbergssallad, rödlök och husets dressing. Serveras med gyllene pommes frites och kall dryck!
+          </p>
+          <div class="mt-5 flex flex-wrap items-center justify-between gap-3 pt-4 border-t-2 border-dashed border-stone-300">
+            <span id="deal-price" class="text-2xl sm:text-3xl font-extrabold text-red-600">
+              139 kr
+            </span>
+            <a id="deal-call-btn" href="tel:063121610" class="text-xs sm:text-sm font-extrabold bg-[#0e5860] hover:bg-[#093e44] text-white px-5 py-3 rounded-xl transition shadow-md uppercase tracking-wider">
+              📞 Ring & Förbeställ
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sektion: Ordinarie Meny / Grill & Burgare -->
+  <section id="meny" class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-8">
+        <span class="inline-block text-xs font-extrabold uppercase tracking-widest text-[#0e5860] bg-teal-100 px-3 py-1 rounded-full mb-2 border border-teal-300">
+          Dixie's Food Line
+        </span>
+        <h2 id="menu-heading" class="font-diner-slab text-3xl sm:text-4xl text-stone-900">Vår Grillmeny</h2>
+        <p id="menu-subtitle" class="text-stone-600 mt-2 max-w-xl mx-auto">
+          Rejäla burgare med amerikansk karaktär, frasiga pommes och klassiska grillrätter – ät här eller ta med!
+        </p>
+      </div>
+
+      <!-- Små kategori-flikar längst upp på kanten av menykortet -->
+      <div id="menu-tabs" class="flex flex-wrap items-end gap-1.5 px-2 border-b-4 border-[#0e5860]"></div>
+
+      <!-- Menyrätter för vald flik renderas här -->
+      <div id="menu-container" class="bg-white p-6 sm:p-8 rounded-b-3xl rounded-tr-3xl border-4 border-t-0 border-[#0e5860] shadow-xl"></div>
+    </div>
+  </section>
+
+  <!-- Sektion: Atmosfär & Retro Diner (fångar känslan från kundens bild!) -->
+  <section id="atmosfar" class="py-14 px-4 bg-[#0e5860] text-white border-y-4 border-red-600 relative overflow-hidden">
+    <div class="max-w-4xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        <div class="md:col-span-7 space-y-4">
+          <span class="inline-block bg-amber-400 text-stone-950 text-xs font-extrabold uppercase tracking-widest px-3 py-1 rounded-full">
+            🎸 Äkta Retro-Känsla på Hagvägen
+          </span>
+          <h2 class="font-diner-slab text-3xl sm:text-4xl text-amber-50 leading-tight">
+            Mer än ett vanligt gatukök – kliv in i vår 50-tals Diner!
+          </h2>
+          <p class="text-teal-50 leading-relaxed text-sm sm:text-base">
+            Hos Dixies Grill möts du av turkosa väggar, runda röda hyttfönster, schackrutigt golv, elgitarrer på väggarna och klassiska röda diner-stolar. Här lagar vi mat med kärlek, rejäla portioner och snabb service.
+          </p>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 text-xs font-bold">
+            <div class="bg-white/10 border border-white/20 rounded-xl p-3 flex items-center gap-2">
+              <span class="text-lg">🍔</span>
+              <span>Nystekta 90g, 150g & 200g Burgare</span>
+            </div>
+            <div class="bg-white/10 border border-white/20 rounded-xl p-3 flex items-center gap-2">
+              <span class="text-lg">🪑</span>
+              <span>Gott om sittplatser i vår Diner</span>
+            </div>
+            <div class="bg-white/10 border border-white/20 rounded-xl p-3 flex items-center gap-2 col-span-2 sm:col-span-1">
+              <span class="text-lg">🥤</span>
+              <span>Dr Pepper, Pepsi & kalla drycker</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visuellt Retro-kort som speglar inredningen (rött hyttfönster + schackrutigt) -->
+        <div class="md:col-span-5 flex justify-center">
+          <div class="w-64 h-64 sm:w-72 sm:h-72 rounded-full bg-gradient-to-b from-[#45a8b5] to-[#0b4248] porthole-ring flex flex-col items-center justify-center text-center p-6 relative">
+            <span class="text-xs font-extrabold uppercase tracking-widest text-amber-300 mb-1">Since Day One</span>
+            <span class="font-diner-script text-5xl text-red-500 drop-shadow-[2px_3px_0px_#111]">Dixie's</span>
+            <span class="mt-1 bg-red-600 text-white font-extrabold text-xs tracking-[0.3em] uppercase px-3 py-1 rounded border border-white/40">
+              FOOD LINE
+            </span>
+            <p class="text-teal-50 text-xs mt-3 font-medium">
+              "Östersunds godaste gatuköksburgare med härlig amerikansk karaktär!"
+            </p>
+            <span class="mt-2 text-amber-300 text-xs font-bold">★★★★★</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sektion: Veckans Lunch / Dagens Erbjudande -->
   <section id="lunch" class="py-16 px-4 max-w-3xl mx-auto">
     <div class="text-center mb-10">
-      <h2 class="text-3xl font-bold tracking-tight text-stone-900">Veckans Lunch</h2>
-      <p class="text-stone-500 mt-2">Serveras vardagar 11:00 – 14:00. Salladsbuffé, bröd, dryck och kaffe ingår.</p>
-      <p class="text-amber-600 font-bold mt-1">Pris: 125 kr</p>
+      <span class="inline-block text-xs font-extrabold uppercase tracking-widest text-red-600 bg-red-100 px-3 py-1 rounded-full mb-2 border border-red-200">
+        Vardagar på Dixies
+      </span>
+      <h2 id="lunch-heading" class="font-diner-slab text-3xl sm:text-4xl text-stone-900">Veckans Lunch & Grilltips</h2>
+      <p id="lunch-info" class="text-stone-600 mt-2 font-medium">Serveras vardagar 11:00 – 14:00. Dryck (33 cl) och kaffe på maten ingår!</p>
+      <p id="lunch-price" class="text-red-600 font-extrabold mt-1.5 text-xl">Lunchpris: från 119 kr</p>
     </div>
 
-    <div class="space-y-4">
-      <!-- Måndag -->
-      <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm">
-        <span class="text-xs font-bold uppercase tracking-wider text-amber-700">Måndag</span>
-        <h3 class="font-bold text-lg text-stone-900 mt-1">Klassisk Wallenbergare</h3>
-        <p class="text-stone-600 text-sm mt-1">Serveras med potatispuré, rårörda lingon, gröna ärtor och skirat smör.</p>
-      </div>
-
-      <!-- Tisdag -->
-      <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm">
-        <span class="text-xs font-bold uppercase tracking-wider text-amber-700">Tisdag</span>
-        <h3 class="font-bold text-lg text-stone-900 mt-1">Stekt fläsk med raggmunk</h3>
-        <p class="text-stone-600 text-sm mt-1">Alternativt stekt fläsk med löksås och kokt potatis.</p>
-      </div>
-
-      <!-- Onsdag -->
-      <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm">
-        <span class="text-xs font-bold uppercase tracking-wider text-amber-700">Onsdag</span>
-        <h3 class="font-bold text-lg text-stone-900 mt-1">Ugnsbakad laxfilé</h3>
-        <p class="text-stone-600 text-sm mt-1">Serveras med dill- och citronsås, kokt potatis och rostade rotfrukter.</p>
-      </div>
-
-      <!-- Torsdag -->
-      <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm">
-        <span class="text-xs font-bold uppercase tracking-wider text-amber-700">Torsdag</span>
-        <h3 class="font-bold text-lg text-stone-900 mt-1">Ärtsoppa & Pannkakor</h3>
-        <p class="text-stone-600 text-sm mt-1">Klassisk ärtsoppa med fläsk, serveras med tunna pannkakor, sylt och grädde.</p>
-      </div>
-
-      <!-- Fredag -->
-      <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm">
-        <span class="text-xs font-bold uppercase tracking-wider text-amber-700">Fredag</span>
-        <h3 class="font-bold text-lg text-stone-900 mt-1">Helstekt ryggbiff</h3>
-        <p class="text-stone-600 text-sm mt-1">Serveras med potatisgratäng, rödvinssås och bearnaise.</p>
-      </div>
-    </div>
+    <!-- Renderas dynamiskt via JavaScript -->
+    <div id="lunch-list" class="space-y-4"></div>
   </section>
 
+  <!-- Schackrutig Diner-bård -->
+  <div class="checkerboard-strip"></div>
+
   <!-- Sektion: Öppettider & Kontakt -->
-  <section id="kontakt" class="bg-stone-100 py-16 px-4 border-t border-stone-200">
-    <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div>
-        <h3 class="text-xl font-bold text-stone-900 mb-3">Öppettider</h3>
-        <ul class="space-y-2 text-stone-600 text-sm">
-          <li class="flex justify-between border-b border-stone-200 pb-1">
-            <span>Måndag – Fredag:</span>
-            <span class="font-medium text-stone-900">11:00 – 21:00</span>
-          </li>
-          <li class="flex justify-between border-b border-stone-200 pb-1">
-            <span>Lördag:</span>
-            <span class="font-medium text-stone-900">12:00 – 22:00</span>
-          </li>
-          <li class="flex justify-between pb-1">
-            <span>Söndag:</span>
-            <span class="font-medium text-stone-900">Stängt</span>
-          </li>
-        </ul>
+  <section id="kontakt" class="bg-white py-16 px-4 border-t-4 border-red-600">
+    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Öppettider-kort -->
+      <div class="bg-[#f7f3eb] p-6 sm:p-8 rounded-3xl border-2 border-stone-300 shadow-sm">
+        <div class="flex items-center gap-2.5 mb-4">
+          <span class="w-9 h-9 rounded-xl bg-red-600 text-white flex items-center justify-center font-bold">🕒</span>
+          <h3 class="font-diner-slab text-2xl text-stone-900">Öppettider</h3>
+        </div>
+        <ul id="hours-list" class="space-y-3 text-stone-700 text-sm sm:text-base"></ul>
+        <p id="hours-note" class="text-xs text-red-700 bg-red-50 border border-red-200 p-2.5 rounded-xl font-semibold mt-4 hidden"></p>
       </div>
 
-      <div>
-        <h3 class="text-xl font-bold text-stone-900 mb-3">Hitta hit & Kontakt</h3>
-        <p class="text-stone-600 text-sm mb-4">
-          Storgatan 12<br>
-          831 30 Östersund
-        </p>
-        <p class="text-stone-600 text-sm mb-4">
-          Telefon: <a href="tel:063XXXXXX" class="font-bold text-amber-700 underline">063-XX XX XX</a><br>
-          E-post: info@restaurangensnamn.se
-        </p>
-        <a href="https://maps.google.com" target="_blank" class="inline-block text-xs font-semibold text-stone-500 underline hover:text-stone-800">
-          Öppna i Google Maps →
-        </a>
+      <!-- Kontakt & Hitta hit-kort -->
+      <div class="bg-[#0e5860] text-white p-6 sm:p-8 rounded-3xl border-4 border-red-600 shadow-lg flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-2.5 mb-4">
+            <span class="w-9 h-9 rounded-xl bg-amber-400 text-stone-950 flex items-center justify-center font-bold">📍</span>
+            <h3 class="font-diner-slab text-2xl text-amber-50">Hitta hit & Beställ</h3>
+          </div>
+
+          <p id="contact-address" class="text-teal-50 text-base mb-5 whitespace-pre-line font-medium leading-relaxed">
+            Hagvägen 35
+            831 48 Östersund
+          </p>
+
+          <div class="space-y-2.5 text-sm sm:text-base mb-6 bg-black/20 p-4 rounded-2xl border border-white/15">
+            <p>
+              <span class="text-teal-200">Telefon:</span>
+              <a id="contact-phone" href="tel:063121610" class="font-extrabold text-amber-300 hover:underline ml-1 text-lg">063-12 16 10</a>
+            </p>
+            <p>
+              <span class="text-teal-200">E-post:</span>
+              <a id="contact-email" href="mailto:info@dixiesgrill.se" class="hover:underline text-white ml-1">info@dixiesgrill.se</a>
+            </p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <a id="contact-maps" href="https://www.google.com/maps/search/?api=1&query=Dixies+Grill+Hagv%C3%A4gen+35+%C3%96stersund" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-amber-400 hover:bg-amber-300 text-stone-950 font-extrabold text-xs sm:text-sm px-5 py-3 rounded-xl transition shadow">
+            <span>🗺️ Öppna i Google Maps →</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Sidfot -->
-  <footer class="bg-stone-900 text-stone-400 py-8 text-center text-xs pb-24 md:pb-8">
-    <p>© 2026 [Restaurangens Namn]. Alla rättigheter förbehållna.</p>
+  <footer class="bg-stone-950 text-stone-400 py-8 px-4 text-center text-xs pb-24 md:pb-8 border-t-4 border-[#0e5860]">
+    <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-diner-script text-xl text-red-500">Dixies Grill</span>
+        <span>•</span>
+        <p id="footer-copy">© 2026 Dixies Grill. Alla rättigheter förbehållna.</p>
+      </div>
+      <button id="open-admin-btn" type="button" class="text-stone-500 hover:text-amber-400 transition flex items-center gap-1.5 text-xs bg-stone-900 px-3 py-1.5 rounded-lg border border-stone-800">
+        <span>🔒</span>
+        <span>Personal / Redigera innehåll</span>
+      </button>
+    </div>
   </footer>
 
+  <!-- ===================================================================== -->
+  <!-- INLOGGNINGS-MODAL FÖR KUNDEN                                          -->
+  <!-- ===================================================================== -->
+  <div id="login-modal" class="fixed inset-0 z-50 hidden bg-stone-900/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border-2 border-red-600">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-bold text-stone-900">Logga in för att redigera</h3>
+        <button id="close-login-btn" type="button" class="text-stone-400 hover:text-stone-700 text-xl leading-none">&times;</button>
+      </div>
+      <p class="text-sm text-stone-600 mb-4">
+        Ange restaurangens PIN-kod / lösenord för att uppdatera veckans lunch, meny och öppettider. (Standard: <strong>1234</strong>)
+      </p>
+      <form id="login-form" class="space-y-4">
+        <div>
+          <label for="admin-password-input" class="block text-xs font-semibold uppercase tracking-wider text-stone-500 mb-1">Lösenord / PIN</label>
+          <input id="admin-password-input" type="password" placeholder="••••" required
+            class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-red-600 text-stone-900">
+          <p id="login-error" class="text-xs text-red-600 mt-1.5 hidden">Fel lösenord. Försök igen!</p>
+        </div>
+        <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2.5 px-4 rounded-xl transition">
+          Logga in
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- ADMIN-PANEL (KUNDENS REDIGERINGSVY)                                   -->
+  <!-- ===================================================================== -->
+  <div id="admin-modal" class="fixed inset-0 z-50 hidden bg-stone-900/75 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4">
+    <div class="bg-stone-50 rounded-2xl max-w-3xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-stone-200 overflow-hidden">
+
+      <!-- Admin Header -->
+      <div class="shrink-0 bg-[#0e5860] text-white px-5 py-4 flex items-center justify-between border-b-4 border-red-600">
+        <div>
+          <h2 class="font-bold text-lg">Redigera Dixies Grill</h2>
+          <p class="text-xs text-teal-100">Ändra veckans deal, meny, lunch och öppettider direkt</p>
+        </div>
+        <button id="close-admin-btn" type="button" class="text-teal-100 hover:text-white px-2.5 py-1 rounded-lg text-sm bg-black/20 hover:bg-black/30 transition">
+          Stäng ✕
+        </button>
+      </div>
+
+      <!-- Flikar (Tabs) -->
+      <div class="shrink-0 bg-white border-b border-stone-200 px-4 pt-2 flex flex-wrap gap-1 text-sm font-semibold">
+        <button type="button" data-tab="tab-lunch" class="admin-tab py-2.5 px-3.5 rounded-t-lg border-b-2 border-red-600 text-red-700 bg-red-50/60 whitespace-nowrap">
+          🍽️ Veckans Lunch
+        </button>
+        <button type="button" data-tab="tab-deal" class="admin-tab py-2.5 px-3.5 rounded-t-lg border-b-2 border-transparent text-stone-600 hover:text-stone-900 hover:bg-stone-50 whitespace-nowrap">
+          🔥 Veckans Deal (Bild)
+        </button>
+        <button type="button" data-tab="tab-menu" class="admin-tab py-2.5 px-3.5 rounded-t-lg border-b-2 border-transparent text-stone-600 hover:text-stone-900 hover:bg-stone-50 whitespace-nowrap">
+          🍔 Ordinarie Meny
+        </button>
+        <button type="button" data-tab="tab-hours" class="admin-tab py-2.5 px-3.5 rounded-t-lg border-b-2 border-transparent text-stone-600 hover:text-stone-900 hover:bg-stone-50 whitespace-nowrap">
+          🕒 Öppettider & Kontakt
+        </button>
+        <button type="button" data-tab="tab-general" class="admin-tab py-2.5 px-3.5 rounded-t-lg border-b-2 border-transparent text-stone-600 hover:text-stone-900 hover:bg-stone-50 whitespace-nowrap">
+          ⚙️ Restaurang & Lösenord
+        </button>
+      </div>
+
+      <!-- Innehåll i flikar (Scrollbart) -->
+      <div class="p-5 overflow-y-auto flex-1 space-y-6">
+
+        <!-- FLIK 1: VECKANS LUNCH -->
+        <div id="tab-lunch" class="admin-tab-content space-y-5">
+          <div class="bg-white p-4 rounded-xl border border-stone-200 space-y-3">
+            <h3 class="font-bold text-stone-900 text-sm uppercase tracking-wider">Lunch-inställningar</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-medium text-stone-600 mb-1">Rubrik (t.ex. Veckans Lunch)</label>
+                <input id="edit-lunch-heading" type="text" class="w-full px-3 py-2 rounded-lg border border-stone-300 text-sm">
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-stone-600 mb-1">Pris-text (t.ex. Lunchpris: 119 kr)</label>
+                <input id="edit-lunch-price" type="text" class="w-full px-3 py-2 rounded-lg border border-stone-300 text-sm">
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-stone-600 mb-1">Information (tider & vad som ingår)</label>
+              <input id="edit-lunch-info" type="text" class="w-full px-3 py-2 rounded-lg border border-stone-300 text-sm">
+            </div>
+          </div>
+
+          <div id="edit-lunch-days" class="space-y-3"></div>
+        </div>
+
+        <!-- FLIK: VECKANS DEAL / ERBJUDANDE MED BILD -->
+        <div id="tab-deal" class="admin-tab-content hidden space-y-5">
+          <div class="bg-white p-4 rounded-xl border border-stone-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-stone-100 pb-3">
+              <div>
+                <h3 class="font-bold text-stone-900 text-sm uppercase tracking-wider">Veckans Deal / Kampanj</h3>
+                <p class="text-xs text-stone-500">Lägg ut en bild och text på ett aktuellt erbjudande</p>
+              </div>
+              <label class="inline-flex items-center gap-2 cursor-pointer select-none bg-red-50 border border-red-200 px-3 py-1.5 rounded-xl">
+                <input id="edit-deal-enabled" type="checkbox" class="w-4 h-4 accent-red-600 rounded">
+                <span class="text-xs font-bold text-red-900">Visa på hemsidan</span>
+              </label>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label class="block text-xs font-medium text-stone-600 mb-1">Etikett (t.ex. 🔥 Veckans Deal)</label>
+                <input id="edit-deal-badge" type="text" class="w-full px-3 py-2 rounded-lg border border-stone-300 text-sm">
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-stone-600 mb-1">Rubrik</label>
+                <input id="edit-deal-title" type="text" class="w-full px-3 py-2 rounded-lg border border-stone-300 text-sm font-semibold">
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-stone-600 mb-1">Pris / Erbjudande</label>
+                <input id="edit-deal-price" type="text" placeholder="t.ex. 139 kr" class="w-full px-3 py-2 rounded-lg border border-stone-300 text-sm">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-medium text-stone-600 mb-1">Beskrivning</label>
+              <textarea id="edit-deal-description" rows="2" class="w-full px-3 py-2 rounded-lg border border-stone-300 text-sm"></textarea>
+            </div>
+
+            <!-- Bilduppladdning & Förhandsgranskning -->
+            <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 space-y-3">
+              <label class="block text-xs font-bold uppercase tracking-wider text-stone-700">Bild till erbjudandet</label>
+
+              <div class="flex flex-wrap items-center gap-3">
+                <label class="cursor-pointer bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition inline-flex items-center gap-1.5 shadow-sm">
+                  <span>📷 Välj bild från mobil / dator</span>
+                  <input id="edit-deal-file" type="file" accept="image/*" class="hidden">
+                </label>
+                <button id="remove-deal-image-btn" type="button" class="text-xs font-semibold text-red-600 hover:text-red-800 px-3 py-2 rounded-lg border border-red-200 bg-white hover:bg-red-50 transition">
+                  🗑️ Ta bort bild
+                </button>
+              </div>
+
+              <div>
+                <label class="block text-[11px] text-stone-500 mb-1">Eller klistra in en bildlänk (valfritt)</label>
+                <input id="edit-deal-image" type="text" placeholder="https://..." class="w-full px-3 py-1.5 rounded-lg border border-stone-300 text-xs bg-white">
+              </div>
+
+              <!-- Förhandsgranskning av vald bild -->
+              <div id="edit-deal-preview-wrap" class="hidden pt-2">
+                <p class="text-[11px] font-semibold text-stone-500 mb-1">Förhandsgranskning av bild:</p>
+                <img id="edit-deal-preview" src="" alt="Förhandsgranskning" class="h-40 w-auto max-w-full object-cover rounded-xl border border-stone-300 shadow-sm">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FLIK 2: ORDINARIE MENY -->
+        <div id="tab-menu" class="admin-tab-content hidden space-y-5">
+          <div class="bg-white p-4 rounded-xl border border-stone-200 space-y-3">
+            <h3 class="font-bold text-stone-900 text-sm uppercase tracking-wider">Meny-rubrik</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-medium text-stone-600 mb-1">Rubrik</label>
+                <input id="edit-menu-heading" type="text" class="w-full px-3 py-2 rounded-lg border border-stone-300 text-sm">
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-stone-600 mb-1">Underrubrik</label>
+                <input id="edit-menu-subtitle" type="text" class="w-full px-3 py-2 rounded-lg border border-stone-300 text-sm">
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <!-- Små kategori-flikar längst upp på kanten i Admin -->
+            <div class="flex flex-wrap items-end justify-between gap-2 border-b border-stone-300 px-1">
+              <div id="admin-menu-cat-tabs" class="flex flex-wrap items-end gap-1"></div>
+              <button id="add-menu-item-btn" type="button" class="mb-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition">
+                + Lägg till rätt här
+              </button>
+            </div>
+
+            <!-- Rätter i vald kategori -->
+            <div id="edit-menu-items" class="bg-stone-100/80 p-3 sm:p-4 rounded-b-xl border border-t-0 border-stone-300 space-y-3"></div>
+          </div>
+        </div>
+
+        <!-- FLIK 3: ÖPPETTIDER & KONTAKT -->
+        <div id="tab-hours" class="admin-tab-content hidden space-y-5">
+          <div class="bg-white p-4 rounded-xl border border-stone-200 space-y-3">
+            <div class="flex items-center justify-between">
+              <h3 class="font-bold text-stone-900 text-sm uppercase tracking-wider">Öppettider</h3>
+              <button id="add-hours-row-btn" type="button" class="text-xs font-bold text-red-700 hover:text-red-800 underline">
+                + Lägg till rad
+              </button>
+            </div>
+            <div id="edit-hours-rows" class="space-y-2"></div>
+            <div class="pt-2">
+              <label class="block text-xs font-medium text-stone-600 mb-1">Extra notis under öppettider (t.ex. "Avvikande tider vid helgdagar")</label>
+              <input id="edit-hours-note" type="text" placeholder="Valfri notis..." class="w-full px-3 py-2 rounded-lg border border-stone-300 text-sm">
+            </div>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-stone-200 space-y-3">
+            <h3 class="font-bold text-stone-900 text-sm uppercase tracking-wider">Kontaktuppgifter</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-medium text-stone-600 mb-1">Telefonnummer (visas på sidan)</label>
+                <input id="edit-phone-display" type="text" class="w-full px-3 py-2 rounded-lg border border-stone-300 text-sm">
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-stone-600 mb-1">E-postadress</label>
+                <input id="edit-email" type="email" class="w-full px-3 py-2 rounded-lg border border-stone-300 text-sm">
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-stone-600 mb-1">Gatuadress & Postort</label>
+              <textarea id="edit-address" rows="2" class="w-full px-3 py-2 rounded-lg border border-stone-300 text-sm"></textarea>
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-stone-600 mb-1">Google Maps-länk</label>
+              <input id="edit-maps-url" type="url" class="w-full px-3 py-2 rounded-lg border border-stone-300 text-sm">
+            </div>
+          </div>
+        </div>
+
+        <!-- FLIK 4: RESTAURANG & LÖSENORD (MALL-INSTÄLLNINGAR) -->
+        <div id="tab-general" class="admin-tab-content hidden space-y-5">
+          <div class="bg-white p-4 rounded-xl border border-stone-200 space-y-3">
+            <h3 class="font-bold text-stone-900 text-sm uppercase tracking-wider">Restaurangens Profil</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-medium text-stone-600 mb-1">Restaurangens Namn</label>
+                <input id="edit-restaurant-name" type="text" class="w-full px-3 py-2 rounded-lg border border-stone-300 text-sm">
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-stone-600 mb-1">Stad / Ort</label>
+                <input id="edit-city" type="text" class="w-full px-3 py-2 rounded-lg border border-stone-300 text-sm">
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-stone-600 mb-1">Huvudrubrik (Hero)</label>
+              <input id="edit-hero-title" type="text" class="w-full px-3 py-2 rounded-lg border border-stone-300 text-sm">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-stone-600 mb-1">Ingress / Beskrivning (Hero)</label>
+              <textarea id="edit-hero-subtitle" rows="2" class="w-full px-3 py-2 rounded-lg border border-stone-300 text-sm"></textarea>
+            </div>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-stone-200 space-y-3">
+            <h3 class="font-bold text-stone-900 text-sm uppercase tracking-wider">Säkerhet & Backup</h3>
+            <div>
+              <label class="block text-xs font-medium text-stone-600 mb-1">Admin-lösenord / PIN för kunden</label>
+              <input id="edit-admin-password" type="text" class="w-full sm:w-64 px-3 py-2 rounded-lg border border-stone-300 text-sm">
+            </div>
+            <div class="pt-2 flex flex-wrap items-center gap-4">
+              <button id="export-json-btn" type="button" class="text-xs font-semibold text-[#0e5860] hover:underline">
+                📥 Ladda ner datafil (data.json)
+              </button>
+              <button id="reset-defaults-btn" type="button" class="text-xs text-red-600 hover:text-red-800 underline">
+                Återställ allt till Dixies grunddata
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Admin Footer (Spara-knapp) -->
+      <div class="shrink-0 bg-white border-t border-stone-200 px-5 py-3.5 flex items-center justify-between gap-3">
+        <span id="save-status" class="text-xs font-medium text-emerald-700 hidden">✓ Ändringarna är sparade!</span>
+        <div class="flex items-center gap-2 ml-auto">
+          <button id="cancel-admin-btn" type="button" class="px-4 py-2 rounded-xl text-sm font-medium text-stone-600 hover:bg-stone-100 transition">
+            Avbryt
+          </button>
+          <button id="save-admin-btn" type="button" class="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-2.5 rounded-xl text-sm shadow-sm transition">
+            💾 Spara ändringar
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- JAVASCRIPT: GRUNDMALL & LOGIK FÖR DIXIES GRILL                        -->
+  <!-- ===================================================================== -->
+  <script>
+    /**
+     * GRUNDINSTÄLLNINGAR FÖR DIXIES GRILL (ÖSTERSUND)
+     * Kan redigeras direkt på sidan via "Personal / Redigera innehåll" längst ner (PIN: 1234).
+     */
+    const DEFAULT_DATA = {
+      adminPassword: "1234",
+      restaurantName: "Dixies Grill",
+      city: "Östersund",
+      heroTitle: "Östersunds skönaste grill & retro-diner!",
+      heroSubtitle: "Saftiga hamburgare direkt från stekbordet, krispiga pommes och riktiga gatuköksklassiker i äkta 50-talsmiljö på Hagvägen 35. Ät här i våra röda diner-stolar eller ta med!",
+      phoneDisplay: "063-12 16 10",
+      email: "info@dixiesgrill.se",
+      address: "Hagvägen 35\n831 48 Östersund",
+      mapsUrl: "https://www.google.com/maps/search/?api=1&query=Dixies+Grill+Hagv%C3%A4gen+35+%C3%96stersund",
+
+      lunch: {
+        heading: "Veckans Lunch & Grilltips",
+        info: "Serveras vardagar 11:00 – 14:00. Dryck (33 cl) och kaffe på maten ingår!",
+        price: "Lunchpris: från 119 kr",
+        days: [
+          {
+            day: "Måndag",
+            title: "Dixies Schnitzeltallrik",
+            description: "Frasig panerad schnitzel med gyllene pommes frites, bearnaisesås, citron och krispig sallad."
+          },
+          {
+            day: "Tisdag",
+            title: "Classic Diner Burger Meal (150g)",
+            description: "Nystekt 150g burgare i sesambröd med smält cheddar, rödlök, sallad, husets dressing och pommes frites."
+          },
+          {
+            day: "Onsdag",
+            title: "Lövbitstallrik med Bearnaise",
+            description: "Mör grillad lövbit som serveras med krispiga pommes frites, bearnaisesås eller kryddsmör samt sallad."
+          },
+          {
+            day: "Torsdag",
+            title: "Kebabtallrik / Gyrostallrik",
+            description: "Rikligt med nygrillat kött, pommes frites, isbergssallad, tomat, gurka, rödlök, feferoni och valfri sås."
+          },
+          {
+            day: "Fredag",
+            title: "Dixies Dubbel Cheese Meal (200g)",
+            description: "Fredagsfavoriten! 200g burgare med dubbel cheddarost, knaperstekt bacon, pommes frites och kall dryck."
+          }
+        ]
+      },
+
+      menu: {
+        heading: "Vår Grillmeny",
+        subtitle: "Rejäla burgare med amerikansk karaktär, frasiga pommes och klassiska grillrätter – ät här eller ta med!",
+        items: [
+          {
+            category: "🍔 Burgare & Meals",
+            name: "Dixies Dubbelburgare Meal (200g)",
+            description: "Vår storsäljare! Dubbelt kött (200g) i sesambröd med dubbel smält cheddar, krispig sallad, rödlök, husets burgerdressing, pommes frites & dryck.",
+            price: "139 kr"
+          },
+          {
+            category: "🍔 Burgare & Meals",
+            name: "Dixies Original Meal (150g)",
+            description: "Saftig 150g burgare med cheddarost, isbergssallad, tomat, rödlök, originaldressing, gyllene pommes frites & dryck.",
+            price: "125 kr"
+          },
+          {
+            category: "🍔 Burgare & Meals",
+            name: "Bacon & BBQ Burger Meal (150g)",
+            description: "Toppad med knaperstekt bacon, smält cheddar, rökig BBQ-sås, krispig lök, sallad, pommes frites & dryck.",
+            price: "135 kr"
+          },
+          {
+            category: "🍔 Burgare & Meals",
+            name: "Chili & Jalapeño Burger Meal (150g)",
+            description: "För dig som gillar hetta! Smält ost, skivade jalapeños, krämig chilimajo, rödlök, sallad, pommes frites & dryck.",
+            price: "135 kr"
+          },
+          {
+            category: "🍔 Burgare & Meals",
+            name: "Diner Classic (90g) Meal",
+            description: "Klassisk 90g hamburgare med ost, sallad, dressing, krispiga pommes frites och valfri dryck.",
+            price: "105 kr"
+          },
+          {
+            category: "🍔 Burgare & Meals",
+            name: "Halloumiburgare Meal (Vegetarisk)",
+            description: "Grillad gyllene halloumi i sesambröd med rödlök, tomat, krispig sallad, dressing, pommes frites & dryck.",
+            price: "125 kr"
+          },
+          {
+            category: "🍟 Grill & Tallrikar",
+            name: "Schnitzeltallrik",
+            description: "Stor frasig panerad schnitzel med gyllene pommes frites, bearnaisesås, citronklyfta och fräsch sallad.",
+            price: "135 kr"
+          },
+          {
+            category: "🍟 Grill & Tallrikar",
+            name: "Kebabtallrik med Pommes",
+            description: "Kryddigt kebabkött på bädd av krispiga pommes frites med sallad, tomat, gurka, lök, feferoni och kebabsås.",
+            price: "129 kr"
+          },
+          {
+            category: "🍟 Grill & Tallrikar",
+            name: "Lövbitstallrik",
+            description: "Serveras med krispiga pommes frites, bearnaisesås eller vitlökssmör samt sallad och tomat.",
+            price: "139 kr"
+          },
+          {
+            category: "🍟 Grill & Tallrikar",
+            name: "Tunnbrödsrulle (Enkel / Dubbel)",
+            description: "Klassisk norrländsk rulle med grillkorv, hemlagat potatismos, räksallad, rostad lök, sallad och senap/ketchup.",
+            price: "95 kr"
+          },
+          {
+            category: "🍟 Grill & Tallrikar",
+            name: "Fish 'n' Chips",
+            description: "Frasig panerad spättafilé med pommes frites, remouladsås, citron och krispig sallad.",
+            price: "129 kr"
+          },
+          {
+            category: "🥤 Tillbehör & Dryck",
+            name: "Pommes Frites (Liten / Stor)",
+            description: "Nyfriterade, gyllene och krispiga pommes frites. Välj till vår goda dippsås!",
+            price: "45 kr"
+          },
+          {
+            category: "🥤 Tillbehör & Dryck",
+            name: "Mozzarellasticks / Chili Cheese (5 st)",
+            description: "Perfekt som extra sides till din burgare.",
+            price: "49 kr"
+          },
+          {
+            category: "🥤 Tillbehör & Dryck",
+            name: "Dippsåser",
+            description: "Bearnaise, Tryffelmajo, Vitlök, Cheddar, Hot Chili eller Original Burger-dipp.",
+            price: "18 kr"
+          },
+          {
+            category: "🥤 Tillbehör & Dryck",
+            name: "Kall Dryck (Dr Pepper, Pepsi, Zingo, Trocadero)",
+            description: "Klassiska läskfavoriter som passar perfekt till grillmaten.",
+            price: "25 kr"
+          }
+        ]
+      },
+
+      hours: [
+        { label: "Måndag – Fredag:", time: "09:00 – 19:00" },
+        { label: "Lördag:", time: "11:00 – 15:00" },
+        { label: "Söndag:", time: "Stängt" }
+      ],
+      hoursNote: "Varmt välkommen in i vår diner eller ring 063-12 16 10 för snabb avhämtning!",
+
+      deal: {
+        enabled: true,
+        badge: "🔥 Dixies Storsäljare",
+        title: "Dixies Dubbel Cheese Meal (200g)",
+        description: "Två saftiga nystekta burgare i sesambröd med smält cheddarost, krispig sallad, rödlök och husets dressing. Serveras med gyllene pommes frites och iskall Dr Pepper eller Pepsi!",
+        price: "139 kr",
+        image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80"
+      }
+    };
+
+    const STORAGE_KEY = "dixies_grill_data_v1";
+
+    function loadData() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          return {
+            ...DEFAULT_DATA,
+            ...parsed,
+            lunch: { ...DEFAULT_DATA.lunch, ...(parsed.lunch || {}) },
+            menu: { ...DEFAULT_DATA.menu, ...(parsed.menu || {}) },
+            deal: { ...DEFAULT_DATA.deal, ...(parsed.deal || {}) }
+          };
+        }
+      } catch (e) {
+        console.warn("Kunde inte läsa sparad data, använder standarddata.", e);
+      }
+      return JSON.parse(JSON.stringify(DEFAULT_DATA));
+    }
+
+    let siteData = loadData();
+
+    function escapeHtml(str) {
+      return String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function cleanPhoneHref(phone) {
+      const cleaned = String(phone || "").replace(/[^0-9+]/g, "");
+      return "tel:" + (cleaned || "063121610");
+    }
+
+    // Returnerar 0 = Måndag ... 4 = Fredag, annars -1
+    function getCurrentWeekdayIndex() {
+      const jsDay = new Date().getDay(); // 0=Sön, 1=Mån ... 6=Lör
+      if (jsDay >= 1 && jsDay <= 5) {
+        return jsDay - 1;
+      }
+      return -1;
+    }
+
+    function renderSite() {
+      const telHref = cleanPhoneHref(siteData.phoneDisplay);
+
+      // Titel & Header
+      document.getElementById("page-title").textContent = `${siteData.restaurantName} - Klassisk Diner, Burgare & Lunch i ${siteData.city}`;
+      document.getElementById("nav-restaurant-name").textContent = siteData.restaurantName;
+
+      const navCallBtn = document.getElementById("nav-call-btn");
+      navCallBtn.href = telHref;
+      navCallBtn.innerHTML = `<span>📞</span><span class="whitespace-nowrap">${escapeHtml(siteData.phoneDisplay)}</span>`;
+
+      const mobileCallBtn = document.getElementById("mobile-call-btn");
+      mobileCallBtn.href = telHref;
+      mobileCallBtn.textContent = `📞 Ring & Beställ: ${siteData.phoneDisplay}`;
+
+      // Hero
+      document.getElementById("hero-badge").textContent = `${siteData.restaurantName} • Klassisk Grill & Diner`;
+      document.getElementById("hero-title").textContent = siteData.heroTitle;
+      document.getElementById("hero-subtitle").textContent = siteData.heroSubtitle;
+
+      // Veckans Deal / Aktuellt Erbjudande
+      const dealSection = document.getElementById("deal-section");
+      const deal = siteData.deal || DEFAULT_DATA.deal;
+      if (deal && deal.enabled) {
+        dealSection.classList.remove("hidden");
+        document.getElementById("deal-badge").textContent = deal.badge || "🔥 Veckans Deal";
+        document.getElementById("deal-title").textContent = deal.title || "";
+        document.getElementById("deal-description").textContent = deal.description || "";
+        document.getElementById("deal-price").textContent = deal.price || "";
+        document.getElementById("deal-call-btn").href = telHref;
+
+        const imgWrap = document.getElementById("deal-image-wrapper");
+        const contentWrap = document.getElementById("deal-content-wrapper");
+        const imgEl = document.getElementById("deal-image");
+
+        if (deal.image && deal.image.trim() !== "") {
+          imgEl.src = deal.image;
+          imgWrap.classList.remove("hidden");
+          contentWrap.className = "md:col-span-7 p-6 sm:p-8 bg-gradient-to-br from-amber-50/70 via-white to-red-50/30";
+        } else {
+          imgWrap.classList.add("hidden");
+          contentWrap.className = "md:col-span-12 p-6 sm:p-8 bg-gradient-to-br from-amber-50/70 via-white to-red-50/30";
+        }
+      } else {
+        dealSection.classList.add("hidden");
+      }
+
+      // Veckans Lunch
+      document.getElementById("lunch-heading").textContent = siteData.lunch.heading;
+      document.getElementById("lunch-info").textContent = siteData.lunch.info;
+      document.getElementById("lunch-price").textContent = siteData.lunch.price;
+
+      const todayIndex = getCurrentWeekdayIndex();
+      const lunchListEl = document.getElementById("lunch-list");
+      lunchListEl.innerHTML = siteData.lunch.days.map((item, idx) => {
+        const isToday = idx === todayIndex;
+        const cardClasses = isToday
+          ? "bg-white p-5 rounded-2xl border-4 border-red-600 shadow-lg relative"
+          : "bg-white p-5 rounded-2xl border-2 border-stone-200 shadow-sm hover:border-[#0e5860] transition";
+        const todayBadge = isToday
+          ? `<span class="ml-2 inline-block px-2.5 py-0.5 bg-red-600 text-white rounded-full text-[11px] font-extrabold uppercase tracking-wider">Idag</span>`
+          : "";
+
+        return `
+          <div class="${cardClasses}">
+            <div class="flex items-center">
+              <span class="text-xs font-extrabold uppercase tracking-wider text-[#0e5860]">${escapeHtml(item.day)}</span>
+              ${todayBadge}
+            </div>
+            <h3 class="font-extrabold text-lg text-stone-900 mt-1">${escapeHtml(item.title)}</h3>
+            <p class="text-stone-600 text-sm mt-1">${escapeHtml(item.description)}</p>
+          </div>
+        `;
+      }).join("");
+
+      // Ordinarie Meny (med kategori-flikar längst upp på kanten)
+      document.getElementById("menu-heading").textContent = siteData.menu.heading;
+      document.getElementById("menu-subtitle").textContent = siteData.menu.subtitle;
+
+      const categories = [];
+      const grouped = {};
+      (siteData.menu.items || []).forEach(item => {
+        const cat = (item.category || "Meny").trim();
+        if (!grouped[cat]) {
+          grouped[cat] = [];
+          categories.push(cat);
+        }
+        grouped[cat].push(item);
+      });
+
+      if (!window.activeMenuCategory || !grouped[window.activeMenuCategory]) {
+        window.activeMenuCategory = categories[0] || "Meny";
+      }
+
+      const menuTabsEl = document.getElementById("menu-tabs");
+      const menuContainer = document.getElementById("menu-container");
+
+      if (categories.length === 0) {
+        menuTabsEl.innerHTML = "";
+        menuContainer.innerHTML = `<p class="text-stone-500 text-sm text-center py-4">Inga rätter tillagda ännu.</p>`;
+      } else {
+        menuTabsEl.innerHTML = categories.map(cat => {
+          const isActive = cat === window.activeMenuCategory;
+          const tabClass = isActive
+            ? "bg-red-600 text-white font-extrabold border-2 border-b-0 border-[#0e5860] rounded-t-2xl px-5 py-3 text-sm shadow-md transition"
+            : "bg-stone-200/80 hover:bg-teal-100 text-stone-700 hover:text-[#0e5860] font-bold border border-transparent rounded-t-2xl px-4 py-2.5 text-sm transition";
+          return `
+            <button type="button" data-public-cat="${escapeHtml(cat)}" class="public-menu-tab ${tabClass}">
+              ${escapeHtml(cat)}
+            </button>
+          `;
+        }).join("");
+
+        menuTabsEl.querySelectorAll(".public-menu-tab").forEach(btn => {
+          btn.addEventListener("click", () => {
+            window.activeMenuCategory = btn.getAttribute("data-public-cat");
+            renderSite();
+          });
+        });
+
+        const activeDishes = grouped[window.activeMenuCategory] || [];
+        const rows = activeDishes.map(dish => `
+          <div class="flex justify-between items-start gap-4 py-4 border-b-2 border-dashed border-stone-200 last:border-0">
+            <div>
+              <h4 class="font-extrabold text-base sm:text-lg text-stone-900">${escapeHtml(dish.name)}</h4>
+              <p class="text-stone-600 text-sm mt-1 leading-relaxed">${escapeHtml(dish.description)}</p>
+            </div>
+            <span class="font-extrabold text-base sm:text-lg text-red-600 bg-red-50 px-3 py-1 rounded-xl border border-red-200 whitespace-nowrap shrink-0">${escapeHtml(dish.price)}</span>
+          </div>
+        `).join("");
+
+        menuContainer.innerHTML = `
+          <div>
+            ${rows}
+          </div>
+        `;
+      }
+
+      // Öppettider
+      const hoursListEl = document.getElementById("hours-list");
+      hoursListEl.innerHTML = (siteData.hours || []).map((row, idx, arr) => {
+        const borderClass = idx < arr.length - 1 ? "border-b border-stone-300/80 pb-2.5" : "pb-1";
+        return `
+          <li class="flex justify-between items-center ${borderClass}">
+            <span class="font-semibold text-stone-700">${escapeHtml(row.label)}</span>
+            <span class="font-extrabold text-stone-900 bg-white px-3 py-1 rounded-lg border border-stone-200">${escapeHtml(row.time)}</span>
+          </li>
+        `;
+      }).join("");
+
+      const hoursNoteEl = document.getElementById("hours-note");
+      if (siteData.hoursNote && siteData.hoursNote.trim() !== "") {
+        hoursNoteEl.textContent = siteData.hoursNote;
+        hoursNoteEl.classList.remove("hidden");
+      } else {
+        hoursNoteEl.classList.add("hidden");
+      }
+
+      // Kontakt
+      document.getElementById("contact-address").textContent = siteData.address;
+      const contactPhoneEl = document.getElementById("contact-phone");
+      contactPhoneEl.href = telHref;
+      contactPhoneEl.textContent = siteData.phoneDisplay;
+
+      const contactEmailEl = document.getElementById("contact-email");
+      contactEmailEl.href = `mailto:${siteData.email}`;
+      contactEmailEl.textContent = siteData.email;
+
+      document.getElementById("contact-maps").href = siteData.mapsUrl || "https://maps.google.com";
+
+      // Footer
+      const year = new Date().getFullYear();
+      document.getElementById("footer-copy").textContent = `© ${year} ${siteData.restaurantName}. Alla rättigheter förbehållna.`;
+    }
+
+    // =====================================================================
+    // MOBILMENY
+    // =====================================================================
+    const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    mobileMenuToggle.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+    document.querySelectorAll(".mobile-nav-link").forEach(link => {
+      link.addEventListener("click", () => mobileMenu.classList.add("hidden"));
+    });
+
+    // =====================================================================
+    // ADMIN-PANEL LOGIK
+    // =====================================================================
+    const loginModal = document.getElementById("login-modal");
+    const adminModal = document.getElementById("admin-modal");
+    const loginForm = document.getElementById("login-form");
+    const passwordInput = document.getElementById("admin-password-input");
+    const loginError = document.getElementById("login-error");
+
+    document.getElementById("open-admin-btn").addEventListener("click", () => {
+      passwordInput.value = "";
+      loginError.classList.add("hidden");
+      loginModal.classList.remove("hidden");
+      setTimeout(() => passwordInput.focus(), 50);
+    });
+
+    document.getElementById("close-login-btn").addEventListener("click", () => {
+      loginModal.classList.add("hidden");
+    });
+
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (passwordInput.value === siteData.adminPassword) {
+        loginModal.classList.add("hidden");
+        openAdminEditor();
+      } else {
+        loginError.classList.remove("hidden");
+      }
+    });
+
+    // Växla flikar i Admin
+    document.querySelectorAll(".admin-tab").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const target = btn.getAttribute("data-tab");
+        document.querySelectorAll(".admin-tab").forEach(b => {
+          b.classList.remove("border-red-600", "text-red-700", "bg-red-50/60");
+          b.classList.add("border-transparent", "text-stone-600");
+        });
+        btn.classList.add("border-red-600", "text-red-700", "bg-red-50/60");
+        btn.classList.remove("border-transparent", "text-stone-600");
+
+        document.querySelectorAll(".admin-tab-content").forEach(panel => {
+          panel.classList.add("hidden");
+        });
+        document.getElementById(target).classList.remove("hidden");
+      });
+    });
+
+    function openAdminEditor() {
+      // Fyll i Lunch
+      document.getElementById("edit-lunch-heading").value = siteData.lunch.heading;
+      document.getElementById("edit-lunch-price").value = siteData.lunch.price;
+      document.getElementById("edit-lunch-info").value = siteData.lunch.info;
+
+      const lunchDaysContainer = document.getElementById("edit-lunch-days");
+      lunchDaysContainer.innerHTML = siteData.lunch.days.map((item, idx) => `
+        <div class="bg-white p-4 rounded-xl border border-stone-200 space-y-2">
+          <div class="font-bold text-xs uppercase tracking-wider text-red-700">${escapeHtml(item.day)}</div>
+          <div>
+            <label class="block text-xs text-stone-500 mb-0.5">Rättens namn</label>
+            <input type="text" data-lunch-day="${idx}" data-field="title" value="${escapeHtml(item.title)}"
+              class="w-full px-3 py-1.5 rounded-lg border border-stone-300 text-sm font-semibold">
+          </div>
+          <div>
+            <label class="block text-xs text-stone-500 mb-0.5">Beskrivning / tillbehör</label>
+            <input type="text" data-lunch-day="${idx}" data-field="description" value="${escapeHtml(item.description)}"
+              class="w-full px-3 py-1.5 rounded-lg border border-stone-300 text-sm">
+          </div>
+        </div>
+      `).join("");
+
+      // Fyll i Veckans Deal
+      const deal = siteData.deal || DEFAULT_DATA.deal;
+      document.getElementById("edit-deal-enabled").checked = Boolean(deal.enabled);
+      document.getElementById("edit-deal-badge").value = deal.badge || "";
+      document.getElementById("edit-deal-title").value = deal.title || "";
+      document.getElementById("edit-deal-price").value = deal.price || "";
+      document.getElementById("edit-deal-description").value = deal.description || "";
+      document.getElementById("edit-deal-image").value = deal.image || "";
+      document.getElementById("edit-deal-file").value = "";
+      updateDealImagePreview(deal.image || "");
+
+      // Fyll i Meny
+      document.getElementById("edit-menu-heading").value = siteData.menu.heading;
+      document.getElementById("edit-menu-subtitle").value = siteData.menu.subtitle;
+      renderAdminMenuItems(siteData.menu.items);
+
+      // Fyll i Öppettider & Kontakt
+      renderAdminHoursRows(siteData.hours);
+      document.getElementById("edit-hours-note").value = siteData.hoursNote || "";
+      document.getElementById("edit-phone-display").value = siteData.phoneDisplay;
+      document.getElementById("edit-email").value = siteData.email;
+      document.getElementById("edit-address").value = siteData.address;
+      document.getElementById("edit-maps-url").value = siteData.mapsUrl;
+
+      // Fyll i Restaurang & Lösenord
+      document.getElementById("edit-restaurant-name").value = siteData.restaurantName;
+      document.getElementById("edit-city").value = siteData.city;
+      document.getElementById("edit-hero-title").value = siteData.heroTitle;
+      document.getElementById("edit-hero-subtitle").value = siteData.heroSubtitle;
+      document.getElementById("edit-admin-password").value = siteData.adminPassword;
+
+      document.getElementById("save-status").classList.add("hidden");
+      adminModal.classList.remove("hidden");
+    }
+
+    let activeAdminMenuCat = null;
+
+    function createAdminMenuRowHtml(item) {
+      return `
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          <div>
+            <label class="block text-xs text-stone-500 mb-0.5">Flik / Kategori</label>
+            <input type="text" class="menu-item-category w-full px-2.5 py-1.5 rounded-lg border border-stone-300 text-sm" value="${escapeHtml(item.category)}">
+          </div>
+          <div>
+            <label class="block text-xs text-stone-500 mb-0.5">Rättens namn</label>
+            <input type="text" class="menu-item-name w-full px-2.5 py-1.5 rounded-lg border border-stone-300 text-sm font-semibold" value="${escapeHtml(item.name)}" placeholder="Rättens namn...">
+          </div>
+          <div class="flex gap-2 items-end">
+            <div class="flex-1">
+              <label class="block text-xs text-stone-500 mb-0.5">Pris (t.ex. 139 kr)</label>
+              <input type="text" class="menu-item-price w-full px-2.5 py-1.5 rounded-lg border border-stone-300 text-sm" value="${escapeHtml(item.price)}" placeholder="139 kr">
+            </div>
+            <button type="button" class="remove-menu-row-btn px-2.5 py-1.5 text-xs text-red-600 hover:bg-red-50 rounded-lg border border-red-200" title="Ta bort rätt">
+              Ta bort
+            </button>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs text-stone-500 mb-0.5">Beskrivning</label>
+          <input type="text" class="menu-item-desc w-full px-2.5 py-1.5 rounded-lg border border-stone-300 text-sm" value="${escapeHtml(item.description)}" placeholder="Beskrivning av rätten...">
+        </div>
+      `;
+    }
+
+    function attachAdminMenuRowEvents(rowEl) {
+      rowEl.querySelector(".remove-menu-row-btn").addEventListener("click", () => {
+        rowEl.remove();
+        refreshAdminMenuCategoryTabs();
+      });
+      rowEl.querySelector(".menu-item-category").addEventListener("change", (e) => {
+        const newCat = e.target.value.trim() || "Meny";
+        activeAdminMenuCat = newCat;
+        refreshAdminMenuCategoryTabs();
+      });
+    }
+
+    function refreshAdminMenuCategoryTabs() {
+      const rows = Array.from(document.querySelectorAll("#edit-menu-items .menu-edit-row"));
+      const cats = [];
+      const counts = {};
+
+      rows.forEach(row => {
+        const cat = (row.querySelector(".menu-item-category").value || "Meny").trim();
+        if (!counts[cat]) {
+          counts[cat] = 0;
+          cats.push(cat);
+        }
+        counts[cat]++;
+      });
+
+      if (cats.length === 0) {
+        cats.push("🍔 Burgare & Meals", "🍟 Grill & Tallrikar", "🥤 Tillbehör & Dryck");
+      }
+
+      if (!activeAdminMenuCat || !cats.includes(activeAdminMenuCat)) {
+        activeAdminMenuCat = cats[0];
+      }
+
+      const tabsContainer = document.getElementById("admin-menu-cat-tabs");
+      tabsContainer.innerHTML = cats.map(cat => {
+        const isActive = cat === activeAdminMenuCat;
+        const count = counts[cat] || 0;
+        const cls = isActive
+          ? "bg-stone-100 text-red-700 font-bold border border-b-0 border-stone-300 rounded-t-lg px-3 py-1.5 -mb-px relative z-10 text-xs transition"
+          : "bg-stone-200/70 hover:bg-stone-200 text-stone-600 font-medium border border-transparent rounded-t-lg px-3 py-1.5 text-xs transition";
+        return `
+          <button type="button" data-admin-cat="${escapeHtml(cat)}" class="admin-cat-tab ${cls}">
+            ${escapeHtml(cat)} <span class="text-[10px] opacity-75">(${count})</span>
+          </button>
+        `;
+      }).join("") + `
+        <button type="button" id="add-new-cat-tab-btn" class="bg-white hover:bg-red-50 text-red-700 border border-stone-300 rounded-t-lg px-2.5 py-1.5 text-xs font-bold transition" title="Skapa ny kategori-flik">
+          + Ny flik
+        </button>
+      `;
+
+      tabsContainer.querySelectorAll(".admin-cat-tab").forEach(btn => {
+        btn.addEventListener("click", () => {
+          activeAdminMenuCat = btn.getAttribute("data-admin-cat");
+          refreshAdminMenuCategoryTabs();
+        });
+      });
+
+      const addCatBtn = document.getElementById("add-new-cat-tab-btn");
+      if (addCatBtn) {
+        addCatBtn.addEventListener("click", () => {
+          const newCat = prompt("Ange namn på ny meny-flik (t.ex. Barnmeny, Sallader, Efterrätter):");
+          if (newCat && newCat.trim()) {
+            activeAdminMenuCat = newCat.trim();
+            addNewAdminDishRow(activeAdminMenuCat);
+          }
+        });
+      }
+
+      rows.forEach(row => {
+        const cat = (row.querySelector(".menu-item-category").value || "Meny").trim();
+        if (cat === activeAdminMenuCat) {
+          row.classList.remove("hidden");
+        } else {
+          row.classList.add("hidden");
+        }
+      });
+    }
+
+    function renderAdminMenuItems(items) {
+      const container = document.getElementById("edit-menu-items");
+      container.innerHTML = "";
+      items.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "bg-white p-3.5 rounded-xl border border-stone-200 space-y-2 menu-edit-row";
+        div.innerHTML = createAdminMenuRowHtml(item);
+        attachAdminMenuRowEvents(div);
+        container.appendChild(div);
+      });
+      refreshAdminMenuCategoryTabs();
+    }
+
+    function addNewAdminDishRow(categoryName) {
+      const container = document.getElementById("edit-menu-items");
+      const div = document.createElement("div");
+      div.className = "bg-white p-3.5 rounded-xl border border-red-400 space-y-2 menu-edit-row";
+      div.innerHTML = createAdminMenuRowHtml({
+        category: categoryName || activeAdminMenuCat || "🍔 Burgare & Meals",
+        name: "",
+        price: "",
+        description: ""
+      });
+      attachAdminMenuRowEvents(div);
+      container.prepend(div);
+      refreshAdminMenuCategoryTabs();
+      const nameInput = div.querySelector(".menu-item-name");
+      if (nameInput) nameInput.focus();
+    }
+
+    document.getElementById("add-menu-item-btn").addEventListener("click", () => {
+      addNewAdminDishRow(activeAdminMenuCat || "🍔 Burgare & Meals");
+    });
+
+    function renderAdminHoursRows(hours) {
+      const container = document.getElementById("edit-hours-rows");
+      container.innerHTML = hours.map(row => `
+        <div class="flex gap-2 items-center hours-edit-row">
+          <input type="text" class="hours-label flex-1 px-3 py-1.5 rounded-lg border border-stone-300 text-sm" value="${escapeHtml(row.label)}" placeholder="Dagar (t.ex. Måndag – Fredag:)">
+          <input type="text" class="hours-time flex-1 px-3 py-1.5 rounded-lg border border-stone-300 text-sm" value="${escapeHtml(row.time)}" placeholder="Tider (t.ex. 09:00 – 19:00)">
+          <button type="button" onclick="this.closest('.hours-edit-row').remove()" class="text-xs text-red-600 hover:text-red-800 px-2 py-1">✕</button>
+        </div>
+      `).join("");
+    }
+
+    document.getElementById("add-hours-row-btn").addEventListener("click", () => {
+      const container = document.getElementById("edit-hours-rows");
+      const div = document.createElement("div");
+      div.className = "flex gap-2 items-center hours-edit-row";
+      div.innerHTML = `
+        <input type="text" class="hours-label flex-1 px-3 py-1.5 rounded-lg border border-stone-300 text-sm" placeholder="Dagar (t.ex. Helgdagar:)">
+        <input type="text" class="hours-time flex-1 px-3 py-1.5 rounded-lg border border-stone-300 text-sm" placeholder="Tider (t.ex. 11:00 – 15:00)">
+        <button type="button" onclick="this.closest('.hours-edit-row').remove()" class="text-xs text-red-600 hover:text-red-800 px-2 py-1">✕</button>
+      `;
+      container.appendChild(div);
+    });
+
+    // Bilduppladdning för Veckans Deal
+    function updateDealImagePreview(src) {
+      const wrap = document.getElementById("edit-deal-preview-wrap");
+      const img = document.getElementById("edit-deal-preview");
+      if (src && src.trim() !== "") {
+        img.src = src;
+        wrap.classList.remove("hidden");
+      } else {
+        img.src = "";
+        wrap.classList.add("hidden");
+      }
+    }
+
+    document.getElementById("edit-deal-image").addEventListener("input", (e) => {
+      updateDealImagePreview(e.target.value);
+    });
+
+    document.getElementById("remove-deal-image-btn").addEventListener("click", () => {
+      document.getElementById("edit-deal-image").value = "";
+      document.getElementById("edit-deal-file").value = "";
+      updateDealImagePreview("");
+    });
+
+    document.getElementById("edit-deal-file").addEventListener("change", (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const img = new Image();
+        img.onload = () => {
+          const maxWidth = 900;
+          let width = img.width;
+          let height = img.height;
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          }
+          const canvas = document.createElement("canvas");
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, width, height);
+          const compressedDataUrl = canvas.toDataURL("image/jpeg", 0.82);
+          document.getElementById("edit-deal-image").value = compressedDataUrl;
+          updateDealImagePreview(compressedDataUrl);
+        };
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    // Spara alla ändringar
+    document.getElementById("save-admin-btn").addEventListener("click", () => {
+      // Veckans Deal
+      siteData.deal = {
+        enabled: document.getElementById("edit-deal-enabled").checked,
+        badge: document.getElementById("edit-deal-badge").value.trim() || "🔥 Veckans Deal",
+        title: document.getElementById("edit-deal-title").value.trim(),
+        price: document.getElementById("edit-deal-price").value.trim(),
+        description: document.getElementById("edit-deal-description").value.trim(),
+        image: document.getElementById("edit-deal-image").value.trim()
+      };
+
+      // Lunch
+      siteData.lunch.heading = document.getElementById("edit-lunch-heading").value.trim() || "Veckans Lunch";
+      siteData.lunch.price = document.getElementById("edit-lunch-price").value.trim();
+      siteData.lunch.info = document.getElementById("edit-lunch-info").value.trim();
+
+      document.querySelectorAll("[data-lunch-day]").forEach(input => {
+        const dayIdx = Number(input.getAttribute("data-lunch-day"));
+        const field = input.getAttribute("data-field");
+        if (siteData.lunch.days[dayIdx]) {
+          siteData.lunch.days[dayIdx][field] = input.value;
+        }
+      });
+
+      // Meny
+      siteData.menu.heading = document.getElementById("edit-menu-heading").value.trim() || "Vår Meny";
+      siteData.menu.subtitle = document.getElementById("edit-menu-subtitle").value.trim();
+
+      const newMenuItems = [];
+      document.querySelectorAll(".menu-edit-row").forEach(row => {
+        const category = row.querySelector(".menu-item-category").value.trim() || "Meny";
+        const name = row.querySelector(".menu-item-name").value.trim();
+        const price = row.querySelector(".menu-item-price").value.trim();
+        const description = row.querySelector(".menu-item-desc").value.trim();
+        if (name) {
+          newMenuItems.push({ category, name, price, description });
+        }
+      });
+      siteData.menu.items = newMenuItems;
+
+      // Öppettider & Kontakt
+      const newHours = [];
+      document.querySelectorAll(".hours-edit-row").forEach(row => {
+        const label = row.querySelector(".hours-label").value.trim();
+        const time = row.querySelector(".hours-time").value.trim();
+        if (label || time) {
+          newHours.push({ label, time });
+        }
+      });
+      siteData.hours = newHours;
+      siteData.hoursNote = document.getElementById("edit-hours-note").value.trim();
+      siteData.phoneDisplay = document.getElementById("edit-phone-display").value.trim();
+      siteData.email = document.getElementById("edit-email").value.trim();
+      siteData.address = document.getElementById("edit-address").value;
+      siteData.mapsUrl = document.getElementById("edit-maps-url").value.trim();
+
+      // Restaurang & Lösenord
+      siteData.restaurantName = document.getElementById("edit-restaurant-name").value.trim() || "Dixies Grill";
+      siteData.city = document.getElementById("edit-city").value.trim() || "Östersund";
+      siteData.heroTitle = document.getElementById("edit-hero-title").value.trim();
+      siteData.heroSubtitle = document.getElementById("edit-hero-subtitle").value.trim();
+      siteData.adminPassword = document.getElementById("edit-admin-password").value.trim() || "1234";
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(siteData));
+      renderSite();
+
+      if (window.location.protocol.startsWith("http")) {
+        fetch("save.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(siteData)
+        }).catch(() => {});
+      }
+
+      const statusEl = document.getElementById("save-status");
+      statusEl.classList.remove("hidden");
+      setTimeout(() => statusEl.classList.add("hidden"), 3000);
+    });
+
+    document.getElementById("export-json-btn").addEventListener("click", () => {
+      const blob = new Blob([JSON.stringify(siteData, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "data.json";
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    document.getElementById("reset-defaults-btn").addEventListener("click", () => {
+      if (confirm("Vill du verkligen återställa hela sidan till Dixies grunddata? Alla egna ändringar raderas.")) {
+        localStorage.removeItem(STORAGE_KEY);
+        siteData = loadData();
+        renderSite();
+        openAdminEditor();
+      }
+    });
+
+    document.getElementById("close-admin-btn").addEventListener("click", () => {
+      adminModal.classList.add("hidden");
+    });
+    document.getElementById("cancel-admin-btn").addEventListener("click", () => {
+      adminModal.classList.add("hidden");
+    });
+
+    // Kör vid sidladdning
+    renderSite();
+  </script>
 </body>
 </html>
